@@ -1,0 +1,28 @@
+jenkins:
+  image: myjenkins
+  ports:
+    - "8080:8080"
+hub:
+  image: selenium/hub
+  ports:
+    - "4444:4444"
+firefox:
+  image: selenium/node-firefox
+  links:
+    - hub
+chrome:
+  image: selenium/node-chrome
+  links:
+    - hub
+db:
+  image: mysql:5.7
+  volumes:
+    - db_data:/var/lib/mysql
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: admin
+    MYSQL_DATABASE: admin
+    MYSQL_USER: admin
+    MYSQL_PASSWORD: admin
+  ports:
+    - "3306:3306"
