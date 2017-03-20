@@ -11,13 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class GoogleSearchTest {
+public class SeleniumHubTest {
 
     private static final DesiredCapabilities CHROME = DesiredCapabilities.chrome();
     private static final DesiredCapabilities FIREFOX = DesiredCapabilities.firefox();
-    private static final String DEFAULT_HOST = "http://localhost:4444/wd/hub";
-    private static final String GOOGLE_COM = "http://www.google.com";
-    private static final String GOOGLE = "Google";
+    private static final String SELENIUM_TITLE = "Selenium Grid Hub v.3.1.0";
+
+    private String seleniumSite = "http://localhost:4444";
 
     @Test
     public void titleExistsChrome() throws Exception {
@@ -31,14 +31,14 @@ public class GoogleSearchTest {
 
     private void titleExists(DesiredCapabilities capabilities) throws MalformedURLException {
         WebDriver driver = createDriver(capabilities);
-        driver.get(GOOGLE_COM);
-        assertEquals(GOOGLE, driver.getTitle());
+        driver.get(seleniumSite);
+        assertEquals(SELENIUM_TITLE, driver.getTitle());
         driver.quit();
     }
 
     private WebDriver createDriver(DesiredCapabilities capability) throws MalformedURLException {
-        String seleniumHost = System.getProperty("selenium_host",DEFAULT_HOST);
-        WebDriver driver = new RemoteWebDriver(new URL(seleniumHost), capability);
+        seleniumSite = System.getProperty("selenium_host", seleniumSite);
+        WebDriver driver = new RemoteWebDriver(new URL(seleniumSite + "/wd/hub"), capability);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driver;
     }
