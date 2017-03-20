@@ -15,7 +15,7 @@ public class GoogleSearchTest {
 
     private static final DesiredCapabilities CHROME = DesiredCapabilities.chrome();
     private static final DesiredCapabilities FIREFOX = DesiredCapabilities.firefox();
-    private static final String SELENIUM_HUB = "http://localhost:4444/wd/hub";
+    private static final String DEFAULT_HOST = "http://localhost:4444/wd/hub";
     private static final String GOOGLE_COM = "http://www.google.com";
     private static final String GOOGLE = "Google";
 
@@ -37,7 +37,8 @@ public class GoogleSearchTest {
     }
 
     private WebDriver createDriver(DesiredCapabilities capability) throws MalformedURLException {
-        WebDriver driver = new RemoteWebDriver(new URL(SELENIUM_HUB), capability);
+        String seleniumHost = System.getProperty("selenium_host",DEFAULT_HOST);
+        WebDriver driver = new RemoteWebDriver(new URL(seleniumHost), capability);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driver;
     }
