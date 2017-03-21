@@ -1,13 +1,3 @@
-# Pre-Built Docker Jenkins Images
-# Maven 3 installed
-# Bundled with Maven3 pre-installed
-# Jenkins Git plugin installed
-# Jenkins CloudBees Docker Build and Publish plugin installed
-# Build Pipeline Plugin installed
-# 
-# As used on blog describing continuous delivery Jenkins, Docker and Spring Boot
-# http://eggsylife.co.uk/2015/12/29/spring-boot-jenkins-and-docker-part-one/
-
 FROM jenkins:1.625.3
 MAINTAINER Matthias Zober
 
