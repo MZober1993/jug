@@ -45,7 +45,7 @@ docker-compose up
 ```
 then configure a maven-jenkins-job on `localhost:8080` with:
 ```
-mvn package -t 4
+mvn package -Dselenium_host=<ip-hub-container>:4444
 ```
-As target you can use this repository, because there are simple selenium test-cases given (title check from google).
+As target you can use this repository, because there are simple selenium test-cases given (title check from selenium-hub).
 
