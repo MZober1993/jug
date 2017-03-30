@@ -12,8 +12,8 @@ So you can use docker to automate the difficult installation-process of a comple
 You only need these two commands to start your own jenkins:
 
 ```
-docker build . -t myjenkins
-docker run --name jenkins -p 8080:8080 myjenkins
+docker build . -t jenkins-image
+docker run --name jenkins-container -p 8080:8080 jenkins-image
 ```
 
 ## Details
@@ -35,7 +35,7 @@ Finally it pre-configures the Jenkins instance with knowledge of the Maven insta
 If you want to test your web-application professionally you should use [selenium](http://docs.seleniumhq.org/docs/07_selenium_grid.jsp ).
 
 Selenium automates browser-testing, this is important to save time in development.
-The only problem with selenium is the time you need to install and configure the service.
+The only problem with selenium is the time you need to install and configure the services.
 
 Docker solves this problem too. 
 Install easily a stack of services: your jenkins, selenium-hub, two nodes and a mysql db with the given docker-compose.yml file and these commands:
