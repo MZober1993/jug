@@ -1,5 +1,7 @@
 jenkins:
-  image: myjenkins
+  image: jenkins-image
+  links:
+    - hub
   ports:
     - "8080:8080"
 hub:
@@ -21,10 +23,9 @@ db:
     - ../data/:/docker-entrypoint-initdb.d/
   restart: always
   environment:
-    MYSQL_ROOT_PASSWORD: admin
+    MYSQL_ROOT_PASSWORD: exxeta-consulting-and-technologies
     MYSQL_DATABASE: admin
     MYSQL_USER: admin
-    MYSQL_PASSWORD: admin
-    MYSQL_DATABASE: admin
+    MYSQL_PASSWORD: exxeta-consulting-and-technologies
   ports:
-    - "3306:3306"
+    - "3307:3306"
