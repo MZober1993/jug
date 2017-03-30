@@ -28,5 +28,7 @@ RUN ln -s /opt/maven/bin/mvn /usr/local/bin
 RUN rm -f /tmp/apache-maven-3.2.2.tar.gz
 ENV MAVEN_HOME /opt/maven
 
+# copy resources for selenium tests
+COPY resources/config.xml /var/jenkins_home/jobs/selenium-hub-test/config.xml
 # Switch back to Jenkins user
 USER jenkins
