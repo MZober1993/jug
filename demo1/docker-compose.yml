@@ -1,5 +1,7 @@
 jenkins:
-  image: myjenkins
+  image: jenkins-image
+  links:
+    - hub
   ports:
     - "8080:8080"
 hub:
