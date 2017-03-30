@@ -5,6 +5,12 @@
 
 This repository contains code-examples how to use [docker](www.docker.com) in combination with jenkins, maven and selenium.
 
+## Windows or Mac OS?
+- please install [docker-machine](https://docs.docker.com/machine/) to get a running docker- and docker-compose-version
+
+## Linux?
+- install docker- and docker-compose [here](https://docs.docker.com/engine/installation/linux/ubuntu/) or use your package-manager 
+
 ## Run a Jenkins-Maven-Container
 
 You need the ci-system jenkins with a full stack of plugins quickly?
@@ -38,7 +44,7 @@ Selenium automates browser-testing, this is important to save time in developmen
 The only problem with selenium is the time you need to install and configure the services.
 
 Docker solves this problem too. 
-Install easily a stack of services: your jenkins, selenium-hub, two nodes and a mysql db with the given docker-compose.yml file and these commands:
+Install easily a stack of services: your jenkins, selenium-hub, two nodes and a mysql db with the given docker-compose.yml (/demo2/docker-compose.yml) file and these commands:
 
 ```
 docker-compose up
@@ -48,4 +54,29 @@ then configure a maven-jenkins-job on `localhost:8080` with:
 mvn package -Dselenium_host=<ip-hub-container>:4444
 ```
 As target you can use this repository, because there are simple selenium test-cases given (title check from selenium-hub).
+
+If you want to interact with your mysql-db simply use:
+```
+docker exec -it demo2_db_1 sh -c 'mysql -u root -p admin'
+```
+Change your data quickly with the given dump.sql files in the data folder.
+These folder is mounted into the db-container (and imported into the db on start-up) with:
+```
+volumes:
+  - ../data/:/docker-entrypoint-initdb.d/
+```
+
+## Something Else
+- try to use docker in combination with maven and jenkins to define a continuous integration / continuous delivery pipeline
+  - this is possible because of the [docker-maven-plugin](http://dmp.fabric8.io/index.html) (builds docker-images in maven-lifecycle)
+  - use this images to deploy your applications into different containers
+  - after your applications are build, they will be deployed and available
+- scale the number of containers per service with `docker-compose scale`
+- use isolated containers to develop in different staging layers
+
+## Sources
+- https://hub.docker.com/u/selenium/
+- https://hub.docker.com/_/mysql/
+- https://hub.docker.com/_/jenkins/
+
 
